@@ -23,7 +23,6 @@ services:
     name: mautic-db
     env: docker
     plan: free
-    dockerCommand: mysqld
     image: mariadb:10.11
     envVars:
       - key: MYSQL_ROOT_PASSWORD
