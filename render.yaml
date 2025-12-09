@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: mautic-web
+    env: docker
+    plan: free
+    autoDeploy: true
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: MAUTIC_DB_HOST
+        fromDatabase:
+          name: mautic-db
+          property: host
+      - key: MAUTIC_DB_USER
+        fromDatabase:
+          name: mautic-db
+          property: user
+      - key: MAUTIC_DB_PASSWORD
+        fromDatabase:
+          name: mautic-db
+          property: password
+      - key: MAUTIC_DB_NAME
+        fromDatabase:
+          name: mautic-db
+          property: database
+      - key: MAUTIC_URL
+        value: https://YOUR-RENDER-URL.onrender.com
+      - key: MAUTIC_TRUSTED_PROXIES
+        value: 0.0.0.0/0
+
+databases:
+  - name: mautic-db
+    plan: free
+    databaseName: mautic
