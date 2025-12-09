@@ -24,8 +24,7 @@ services:
     env: docker
     plan: free
     dockerCommand: mysqld
-    dockerImage:
-      image: mariadb:10.11
+    image: mariadb:10.11
     envVars:
       - key: MYSQL_ROOT_PASSWORD
         value: rootpassword123
