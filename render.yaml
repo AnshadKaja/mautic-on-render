@@ -7,27 +7,31 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: MAUTIC_DB_HOST
-        fromDatabase:
-          name: mautic-db
-          property: host
+        value: mautic-db
       - key: MAUTIC_DB_USER
-        fromDatabase:
-          name: mautic-db
-          property: user
+        value: mauticuser
       - key: MAUTIC_DB_PASSWORD
-        fromDatabase:
-          name: mautic-db
-          property: password
+        value: strongpassword123
       - key: MAUTIC_DB_NAME
-        fromDatabase:
-          name: mautic-db
-          property: database
+        value: mautic
       - key: MAUTIC_URL
         value: https://YOUR-RENDER-URL.onrender.com
       - key: MAUTIC_TRUSTED_PROXIES
         value: 0.0.0.0/0
 
-databases:
-  - name: mautic-db
+  - type: private
+    name: mautic-db
+    env: docker
     plan: free
-    databaseName: mautic
+    dockerCommand: mysqld
+    dockerImage:
+      image: mariadb:10.11
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: rootpassword123
+      - key: MYSQL_DATABASE
+        value: mautic
+      - key: MYSQL_USER
+        value: mauticuser
+      - key: MYSQL_PASSWORD
+        value: strongpassword123
